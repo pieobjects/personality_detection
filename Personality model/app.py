@@ -3,6 +3,7 @@ from model import Model
 import tensorflow as tf
 import keras
 from update_personality import update_prediction
+from wors_in_emotionLexicon import count_word
 #import tensorflow_core.keras
 from prediction import Predictor_cat5,mbti_models
 app=Flask(__name__)
@@ -15,6 +16,7 @@ def test():
     if request.method=='POST':
         json_data=request.json
         text=json_data['text']
+        words,lex_words=count_word(text)
         cat5_probablity=Predictor_cat5_obj.predict([text])
         mbti_probablity=mbti_models_obj.predict([text])
         probablity.update(cat5_probablity)
