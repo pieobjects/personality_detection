@@ -52,7 +52,7 @@ def file_line(df,column_name):
 # In[11]:
 
 
-def unique_word_column(text):
+def clean(text):
     un_lst=['\t','\n','\\x']
     text=' '.join(set(remove_unwanted(custom_nlp( re.sub('[\d.,;:\'\"\\!<>@#$%^&?*\(\)\{\}\[\]\=\+\-/`~\|]',' ',remove_unwanted_extra(un_lst,text.lower())) )) ))
     return text
