@@ -17,11 +17,14 @@ def test():
         json_data=request.json
         text=json_data['text']
         words,lex_words=count_word(text)
-        cat5_probablity=Predictor_cat5_obj.predict([text])
-        mbti_probablity=mbti_models_obj.predict([text])
-        probablity.update(cat5_probablity)
-        probablity.update(mbti_probablity)
-        return jsonify({'probablities':str(probablity)})
+        if len(lex_words)<50:
+            return  jsonify({'warning':'Not enough required words'}) 
+        else:
+            cat5_probablity=Predictor_cat5_obj.predict([text])
+            mbti_probablity=mbti_models_obj.predict([text])
+            probablity.update(cat5_probablity)
+            probablity.update(mbti_probablity)
+            return jsonify({'probablities':str(probablity)})
 
 @app.route('/review',methods=['POST'])
 def update_personality_trades():
