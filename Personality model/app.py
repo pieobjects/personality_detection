@@ -4,6 +4,7 @@ import tensorflow as tf
 import keras
 from update_personality import update_prediction
 from wors_in_emotionLexicon import count_word
+from vocabulary import clean 
 #import tensorflow_core.keras
 from prediction import Predictor_cat5,mbti_models
 app=Flask(__name__)
@@ -16,6 +17,7 @@ def test():
     if request.method=='POST':
         json_data=request.json
         text=json_data['text']
+        text=clean(text)
         words,lex_words=count_word(text)
         if len(lex_words)<50:
             return  jsonify({'warning':'Not enough required words'}) 
