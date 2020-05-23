@@ -52,30 +52,9 @@ def file_line(df,column_name):
 # In[11]:
 
 
-def unique_word_column(column_name):
+def unique_word_column(text):
     un_lst=['\t','\n','\\x']
-    global df
-    for i in range(len(df)):
-        try:
-            df[column_name][i]=' '.join(set(remove_unwanted(custom_nlp( re.sub('[\d.,;:\'\"\\!<>@#$%^&?*\(\)\{\}\[\]\=\+\-/`~\|]',' ',remove_unwanted_extra(un_lst,df[column_name][i].lower())) )) ))
-#             print(df[column_name][i])
-        except Exception as e:
-            print(e)
-    return df
-
-
-# In[12]:
-
-
-df=pd.read_csv(input("Enter path to file : "))
-column_names=['posts']
-for column_name in column_names:
-    unique_word_column(column_name)
-    
-
-
-# In[ ]:
-
-
+    text=' '.join(set(remove_unwanted(custom_nlp( re.sub('[\d.,;:\'\"\\!<>@#$%^&?*\(\)\{\}\[\]\=\+\-/`~\|]',' ',remove_unwanted_extra(un_lst,text.lower())) )) ))
+    return text
 
 
